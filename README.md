@@ -1,2 +1,1 @@
-afq
-  └── index.html
+index.html
