@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>منصة أفق</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html,body{
+overflow-x:hidden;
+font-family:'Cairo',sans-serif;
+background:linear-gradient(135deg,#f6f9fc,#eef3f8);
+color:#111;
+}
+
+/* HEADER */
+header{
+position:fixed;
+width:100%;
+top:0;
+background:rgba(255,255,255,.9);
+backdrop-filter:blur(10px);
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 50px;
+z-index:1000;
+box-shadow:0 8px 30px rgba(0,0,0,.06);
+}
+
+.logo{
+display:flex;
+gap:10px;
+font-weight:700;
+align-items:center;
+font-size:20px
+}
+
+.logo img{
+width:40px;
+border-radius:10px
+}
+
+/* NAV */
+nav{
+display:flex;
+gap:25px
+}
+
+nav a{
+text-decoration:none;
+color:#333;
+font-weight:600
+}
+
+nav a:hover{
+color:#0A8FBC
+}
+
+/* زر القائمة */
+.menu-btn{
+display:none;
+font-size:28px;
+cursor:pointer
+}
+
+/* HERO */
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:white;
+padding:120px 20px;
+background:url("logo.png") center/cover no-repeat;
+position:relative;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+inset:0;
+background:linear-gradient(45deg,rgba(0,0,0,.8),rgba(10,143,188,.6));
+}
+
+.hero *{position:relative}
+.hero h1{font-size:42px;margin-bottom:20px}
+
+/* BUTTON */
+.btn{
+background:linear-gradient(45deg,#0A8FBC,#0077ff);
+color:white;
+border:none;
+padding:16px 40px;
+border-radius:14px;
+cursor:pointer;
+font-weight:700;
+margin-top:25px;
+transition:.3s
+}
+
+.btn:hover{transform:translateY(-4px)}
+
+/* SECTIONS */
+section{padding:100px 20px}
+
+/* FEATURES */
+.features{
+display:flex;
+gap:30px;
+justify-content:center;
+flex-wrap:wrap
+}
+
+.card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 15px 35px rgba(0,0,0,.08);
+width:270px;
+text-align:center;
+transition:.3s
+}
+
+.card:hover{transform:translateY(-10px)}
+
+/* ABOUT */
+.about{
+max-width:800px;
+margin:auto;
+text-align:center;
+line-height:2;
+font-size:18px
+}
+
+/* REVIEWS */
+.reviews{
+background:white;
+text-align:center
+}
+
+.review-form{
+max-width:500px;
+margin:40px auto;
+display:flex;
+flex-direction:column;
+gap:15px
+}
+
+.review-form textarea{
+padding:18px;
+border-radius:12px;
+border:1px solid #ddd
+}
+
+/* STARS */
+.stars{font-size:35px;cursor:pointer}
+.stars span{color:#ddd}
+.stars .active{color:gold}
+
+/* REVIEW LIST */
+.review-list{
+max-width:700px;
+margin:40px auto;
+text-align:right
+}
+
+.review-item{
+background:#f6f9fc;
+padding:25px;
+border-radius:18px;
+margin-bottom:20px
+}
+
+.review-item img{
+max-width:100%;
+border-radius:12px;
+margin-top:10px
+}
+
+.review-actions{
+margin-top:12px;
+display:flex;
+gap:10px
+}
+
+.review-actions button{
+padding:8px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer
+}
+
+.review-actions button:first-child{
+background:#0077ff;
+color:white
+}
+
+.review-actions button:last-child{
+background:#ff4d4d;
+color:white
+}
+
+/* انيميشن */
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:1s
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0)
+}
+
+/* ===== MOBILE ===== */
+
+@media (max-width:768px){
+
+header{padding:15px}
+
+.menu-btn{display:block}
+
+nav{
+display:none;
+flex-direction:column;
+width:100%;
+background:white;
+position:fixed;
+top:70px;
+right:0;
+left:0;
+padding:20px 0;
+z-index:999
+}
+
+nav.show{display:flex}
+
+.hero{
+min-height:90vh;
+padding:160px 20px 80px
+}
+
+.hero h1{font-size:28px}
+
+.features{
+flex-direction:column;
+align-items:center
+}
+
+.card{width:90%}
+
+section{padding:80px 15px}
+}
+
+footer{
+text-align:center;
+padding:50px;
+color:#777
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+<img src="logo.png">
+<span>منصة أفق</span>
+</div>
+
+<div class="menu-btn" onclick="toggleMenu()">☰</div>
+
+<nav id="navMenu">
+<a href="#home">الرئيسية</a>
+<a href="https://salla.sa/afqedu/azAAzKn" target="_blank">المتجر</a>
+<a href="#reviews">الآراء</a>
+<a href="#about">من نحن</a>
+<a href="https://docs.google.com/forms/d/e/1FAIpQLSfFGw75AacYJzIGc5U67-3I6ohasSNSJyiq90LQ8hU53y-Clg/viewform" target="_blank">سجل اهتمامك</a>
+<a href="https://snapchat.com/t/FMFZo84e" target="_blank">تواصل</a>
+</nav>
+
+</header>
+
+<section class="hero reveal" id="home">
+<h1>✨ تجربة جديدة ومميزة مع منصة أفق</h1>
+<p>واجهة أنيقة وسهلة الاستخدام لتطوير قدراتك</p>
+<p>🔥 خصم خاص باستخدام كوبون <b>AFQ</b></p>
+
+<a href="https://salla.sa/afqedu/azAAzKn" target="_blank">
+<button class="btn">ابدأ الآن</button>
+</a>
+</section>
+
+<section class="features reveal">
+<div class="card">⭐ أكثر من 90 مهارة ذهنية</div>
+<div class="card">📚 مناسب للمبتدئ والمتقدم</div>
+<div class="card">⚡ تعلم سريع ونتائج فعالة</div>
+<div class="card">🎯 شرح مبسط وسهل</div>
+</section>
+
+<section id="about" class="reveal">
+<div class="about">
+<h2>من نحن</h2>
+<p>
+منصة أفق منصة تعليمية متكاملة تهدف إلى تطوير القدرات الذهنية
+وبناء جيل متميز بأسلوب حديث وتجربة تعلم سهلة وسريعة.
+</p>
+</div>
+</section>
+
+<section class="reviews reveal" id="reviews">
+
+<h2>الآراء والملاحظات</h2>
+<p id="avgRating">⭐ متوسط التقييم: 0</p>
+<p id="countRating">عدد التقييمات: 0</p>
+
+<div class="review-form">
+<textarea id="comment" placeholder="اكتب رأيك..."></textarea>
+<input type="file" id="imageUpload">
+
+<div class="stars" id="stars">
+<span data-rate="1">★</span>
+<span data-rate="2">★</span>
+<span data-rate="3">★</span>
+<span data-rate="4">★</span>
+<span data-rate="5">★</span>
+</div>
+
+<button class="btn" onclick="addReview()">إرسال التقييم</button>
+</div>
+
+<div class="review-list" id="reviewList"></div>
+
+</section>
+
+<footer>© 2026 منصة أفق</footer>
+
+<script>
+
+/* القائمة للجوال */
+function toggleMenu(){
+document.getElementById("navMenu").classList.toggle("show");
+}
+
+/* النجوم */
+let rating=0;
+let editIndex=null;
+const stars=document.querySelectorAll("#stars span");
+
+stars.forEach(star=>{
+star.onclick=()=>{
+rating=star.dataset.rate;
+updateStars();
+};
+});
+
+function updateStars(){
+stars.forEach(star=>{
+star.classList.toggle("active",star.dataset.rate<=rating);
+});
+}
+
+/* إضافة تقييم */
+function addReview(){
+const text=document.getElementById("comment").value;
+const file=document.getElementById("imageUpload").files[0];
+
+if(!text||rating==0){
+alert("اكتب رأيك واختر التقييم");
+return;
+}
+
+if(file){
+const reader=new FileReader();
+reader.onload=()=>saveReview(text,rating,reader.result);
+reader.readAsDataURL(file);
+}else{
+saveReview(text,rating,null);
+}
+}
+
+function saveReview(text,rating,image){
+let reviews=JSON.parse(localStorage.getItem("reviews")||"[]");
+
+if(editIndex!==null){
+reviews[editIndex]={text,rating,image};
+editIndex=null;
+}else{
+reviews.push({text,rating,image});
+}
+
+localStorage.setItem("reviews",JSON.stringify(reviews));
+document.getElementById("comment").value="";
+document.getElementById("imageUpload").value="";
+rating=0;
+updateStars();
+showReviews();
+}
+
+/* عرض التقييمات */
+function showReviews(){
+const list=document.getElementById("reviewList");
+let reviews=JSON.parse(localStorage.getItem("reviews")||"[]");
+
+reviews.sort((a,b)=>b.rating-a.rating);
+list.innerHTML="";
+let total=0;
+
+reviews.forEach((r,i)=>{
+total+=Number(r.rating);
+
+list.innerHTML+=`
+<div class="review-item">
+<p>${r.text}</p>
+<div>${"⭐".repeat(r.rating)}</div>
+${r.image?`<img src="${r.image}">`:""}
+<div class="review-actions">
+<button onclick="editReview(${i})">تعديل</button>
+<button onclick="deleteReview(${i})">حذف</button>
+</div>
+</div>
+`;
+});
+
+const avg=reviews.length?(total/reviews.length).toFixed(1):0;
+document.getElementById("avgRating").innerText="⭐ متوسط التقييم: "+avg;
+document.getElementById("countRating").innerText="عدد التقييمات: "+reviews.length;
+}
+
+function deleteReview(index){
+let reviews=JSON.parse(localStorage.getItem("reviews"));
+reviews.splice(index,1);
+localStorage.setItem("reviews",JSON.stringify(reviews));
+showReviews();
+}
+
+function editReview(index){
+let reviews=JSON.parse(localStorage.getItem("reviews"));
+document.getElementById("comment").value=reviews[index].text;
+rating=reviews[index].rating;
+updateStars();
+editIndex=index;
+}
+
+showReviews();
+
+/* انيميشن */
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+if(entry.isIntersecting){
+entry.target.classList.add("active");
+}
+});
+});
+
+document.querySelectorAll("section,.card").forEach(el=>{
+el.classList.add("reveal");
+observer.observe(el);
+});
+
+</script>
+
+</body>
+</html>
